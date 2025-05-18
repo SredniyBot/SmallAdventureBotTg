@@ -6,8 +6,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class Bot extends TelegramLongPollingBot {
 
     private static PlayerCollection collection;
-    Bot() {
-        super("1016755744:AAG8EegXDyHfSUQfUJzihbd_GRrTLQPFS2M");
+    Bot(String token) {
+        super(token);
         System.out.println("HORRAY2");
         collection = new PlayerCollection(this);
     }
