@@ -3,14 +3,13 @@ package Bot;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-public class Bot extends TelegramLongPollingBot{
+public class Bot extends TelegramLongPollingBot {
 
     private static PlayerCollection collection;
     Bot() {
+        super("1016755744:AAG8EegXDyHfSUQfUJzihbd_GRrTLQPFS2M");
         System.out.println("HORRAY2");
-
         collection = new PlayerCollection(this);
-
     }
 
 
@@ -23,15 +22,12 @@ public class Bot extends TelegramLongPollingBot{
     public void onUpdateReceived(Update update) {
         Player p =collection.getPlayer(update);
         CheckMessage ch = new CheckMessage(p,update);
+
     }
 
     @Override
     public String getBotUsername() {
         return "small_adventure_bot";
-    }
-    @Override
-    public String getBotToken() {
-        return "1016755744:AAG8EegXDyHfSUQfUJzihbd_GRrTLQPFS2M";
     }
 
 }

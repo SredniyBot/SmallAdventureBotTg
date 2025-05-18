@@ -16,7 +16,7 @@ public class ImagePanel extends JPanel{
     private ImageIcon errorl;
     private Stage s;
     private int Size =300;
-    private String URL="Images";
+    private String URL= "Images";
     {
         ClassLoader classLoader = Program.class.getClassLoader();
         URL = classLoader.getResource(URL).getPath();

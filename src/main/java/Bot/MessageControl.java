@@ -1,7 +1,5 @@
 package Bot;
 
-import Creation.Program;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,39 +8,36 @@ import java.util.ArrayList;
 
 public class MessageControl {
 
+    private final boolean first = true;
     Player p;
-    private String URL="";
-
-    private boolean first=true;
-    private String text;
     Delete del;
+    private String URL = "";
+    private String text;
 
 
-
-    MessageControl(Player p){
-        this.p=p;
-        del=new Delete(p);
-        URL=this.getClass().getResource("/").getPath()+"Players/"+p.getChatId()+"/messages/log.txt";
+    MessageControl(Player p) {
+        this.p = p;
+        del = new Delete(p);
+        URL = this.getClass().getResource("/").getPath() + "Players/" + p.getChatId() + "/messages/log.txt";
     }
 
 
-    public void setNewMessage(String mid){
-        text=getText();
+    public void setNewMessage(String mid) {
+        text = getText();
 
-        try {
-            FileWriter fl =new FileWriter(URL);
-            text=text+"["+mid+"]\n";
+        try (FileWriter fl = new FileWriter(URL)) {
+            text = text + "[" + mid + "]\n";
             fl.write(text);
             fl.flush();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
 
         }
     }
 
-    public void clear(){
-        text=getText();
+    public void clear() {
+        text = getText();
         try {
-            FileWriter fl =new FileWriter(URL);
+            FileWriter fl = new FileWriter(URL);
             fl.write("");
             fl.flush();
         } catch (IOException e) {
@@ -50,19 +45,19 @@ public class MessageControl {
         }
     }
 
-    public ArrayList<String> getMessages(){
-        text=getText();
+    public ArrayList<String> getMessages() {
+        text = getText();
         ArrayList<String> s = new ArrayList<>();
-        String ts=text;
-        while (ts.contains("[")){
-            s.add(ts.substring(ts.indexOf("[")+1,ts.indexOf("]")));
-            ts=ts.substring(ts.indexOf("]")+1);
+        String ts = text;
+        while (ts.contains("[")) {
+            s.add(ts.substring(ts.indexOf("[") + 1, ts.indexOf("]")));
+            ts = ts.substring(ts.indexOf("]") + 1);
         }
         return s;
     }
 
     private String getText() {
-        String t="";
+        String t = "";
         FileReader tfr = null;
         try {
             tfr = new FileReader(URL);
@@ -73,8 +68,6 @@ public class MessageControl {
                 chars = tfr.read(buffer);
             }
             tfr.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,6 +77,7 @@ public class MessageControl {
     public void deletePrev() {
         del.all();
     }
+
     public void deleteAfter() {
         del.allAfter();
     }
